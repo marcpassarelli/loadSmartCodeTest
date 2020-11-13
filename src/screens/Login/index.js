@@ -17,6 +17,7 @@ const Login = () => {
   const goToProfile = () => {
     navigate('Profile');
   };
+
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground source={backgroundImg} style={styles.backgroundImg}>
@@ -24,6 +25,7 @@ const Login = () => {
           <Text style={styles.title}>Sign in to</Text>
           <Image source={gitHubLogo} style={styles.logo} />
         </View>
+
         <View style={styles.formArea}>
           <TextInputWithTitle title="Username or email" />
           <TextInputWithTitle title="Password" secureTextEntry={true} />
@@ -34,6 +36,7 @@ const Login = () => {
             }}
           />
         </View>
+
         <Image source={markLogo} style={styles.logoBottom} />
       </ImageBackground>
     </SafeAreaView>
