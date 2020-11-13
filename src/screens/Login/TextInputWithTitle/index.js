@@ -7,7 +7,7 @@ const TextInputWithTitle = (props) => {
   return (
     <View>
       <Text style={styles.titleTextInput}>{props.title}</Text>
-      <TextInput {...props} style={styles.textInput} />
+      <TextInput {...props} style={styles.textInput} autoCapitalize="none" />
     </View>
   );
 };
