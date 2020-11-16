@@ -1,46 +1,50 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
-import { Image, View, SafeAreaView, Text, ImageBackground } from 'react-native';
+import React, { useState } from 'react';
+import {
+  View,
+  SafeAreaView,
+  ImageBackground,
+  ActivityIndicator,
+} from 'react-native';
+import { useDispatch } from 'react-redux';
 
-import gitHubLogo from '../../assets/logo.png';
-import markLogo from '../../assets/mark.png';
+import ButtonWithLogo from './ButtonWithLogo';
+
 import backgroundImg from '../../assets/background.jpg';
 
-import CustomButton from '../../components/Button';
-import TextInputWithTitle from './TextInputWithTitle';
-
 import styles from './styles';
+import { loginGithub } from '../../state/auth/actions';
 
 const Login = () => {
+  const dispatch = useDispatch();
   const { navigate } = useNavigation();
+  const [loading, setLoading] = useState(false);
 
   const goToProfile = () => {
     navigate('Profile');
   };
 
+  const login = async () => {
+    setLoading(true);
+    await dispatch(loginGithub());
+    setLoading(false);
+    goToProfile();
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground source={backgroundImg} style={styles.backgroundImg}>
-        <View style={styles.logoAreaTop}>
-          <Text style={styles.title}>Sign in to</Text>
-          <Image source={gitHubLogo} style={styles.logo} />
-        </View>
-
-        <View style={styles.formArea}>
-          <TextInputWithTitle title="Username or email" />
-          <TextInputWithTitle title="Password" secureTextEntry={true} />
-          <CustomButton
-            text="Login"
-            onPress={() => {
-              goToProfile();
-            }}
-          />
-        </View>
-
-        <Image source={markLogo} style={styles.logoBottom} />
+        {loading ? (
+          <ActivityIndicator size="large" color="#fff" />
+        ) : (
+          <View style={styles.buttonArea}>
+            <ButtonWithLogo onPress={login} />
+          </View>
+        )}
       </ImageBackground>
     </SafeAreaView>
   );
 };
 
+//export your list as a default export
 export default Login;
