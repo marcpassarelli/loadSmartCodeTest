@@ -9,24 +9,10 @@ const styles = StyleSheet.create({
   backgroundImg: {
     width: '100%',
     flex: 1,
-    resizeMode: 'cover',
     alignItems: 'center',
-  },
-  formArea: { width: '60%', height: '30%', justifyContent: 'space-around' },
-  logoAreaTop: {
-    flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 60,
-    marginBottom: 40,
   },
-  title: { fontSize: 20, fontWeight: 'bold' },
-  logo: {
-    width: 100,
-    height: 40,
-    resizeMode: 'contain',
-  },
-  logoBottom: { position: 'absolute', bottom: 100 },
+  buttonArea: { width: '70%', height: '30%' },
 });
 
 export default styles;
