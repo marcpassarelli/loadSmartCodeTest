@@ -148,7 +148,6 @@
 				DCD49957DC1F01782E131B21 /* Pods-loadSmartCodeTest-tvOSTests.debug.xcconfig */,
 				32F95443E2D690F0EB0C0831 /* Pods-loadSmartCodeTest-tvOSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
