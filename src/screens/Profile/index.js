@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
+  ActivityIndicator,
   Alert,
   Image,
   SafeAreaView,
@@ -9,14 +10,23 @@ import {
   View,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../../state/auth/actions';
+import { logout } from '../../store/modules/auth/actions';
+import { getUser } from '../../store/modules/user/actions';
 
 import styles from './styles';
 
 const Profile = () => {
   const userInfo = useSelector((state) => state.user.userInfo);
+  const authInfo = useSelector((state) => state.auth.authInfo);
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    dispatch(getUser(authInfo.accessToken)).then(() => {
+      setLoading(false);
+    });
+  }, [authInfo.accessToken, dispatch]);
 
   useEffect(() => navigation.addListener('beforeRemove', handleBeforeRemove), [
     handleBeforeRemove,
@@ -52,22 +62,28 @@ const Profile = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}> Profile Screen</Text>
-      <View style={styles.profileArea}>
-        <Image
-          source={{
-            uri: userInfo.avatar_url,
-          }}
-          style={styles.profileImg}
-        />
+      {loading ? (
+        <ActivityIndicator size="large" color="#fff" />
+      ) : (
+        <>
+          <View style={styles.profileArea}>
+            <Image
+              source={{
+                uri: userInfo.avatar_url,
+              }}
+              style={styles.profileImg}
+            />
 
-        <Text style={styles.textName}>{userInfo.name}</Text>
-        <Text style={styles.textProfileInfo}>{userInfo.login}</Text>
-        <Text style={styles.textProfileInfo}>{userInfo.location}</Text>
-        <Text style={styles.textProfileInfo}>{userInfo.bio}</Text>
-      </View>
-      <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-        <Text>Logout?</Text>
-      </TouchableOpacity>
+            <Text style={styles.textName}>{userInfo.name}</Text>
+            <Text style={styles.textProfileInfo}>{userInfo.login}</Text>
+            <Text style={styles.textProfileInfo}>{userInfo.location}</Text>
+            <Text style={styles.textProfileInfo}>{userInfo.bio}</Text>
+          </View>
+          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+            <Text>Logout?</Text>
+          </TouchableOpacity>
+        </>
+      )}
     </SafeAreaView>
   );
 };

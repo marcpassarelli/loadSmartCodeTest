@@ -1,6 +1,7 @@
 const initialState = {
   authInfo: {},
   error: undefined,
+  isLogged: false,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -10,6 +11,7 @@ const authReducer = (state = initialState, action) => {
         ...state,
         error: undefined,
         authInfo: action.authInfo,
+        isLogged: true,
       };
 
     case 'LOGIN_FAILED':
@@ -20,8 +22,7 @@ const authReducer = (state = initialState, action) => {
 
     case 'LOGOUT':
       return {
-        ...state,
-        authInfo: {},
+        ...initialState,
       };
     default:
       return state;
