@@ -9,33 +9,33 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import ButtonWithLogo from './ButtonWithLogo';
 import backgroundImg from '../../assets/background.jpg';
-import {
-  getNewAccessToken,
-  loginGithub,
-} from '../../store/modules/auth/actions';
+import { getNewAccessToken } from '../../store/modules/auth/actions';
 import styles from './styles';
 
 const Login = () => {
   const dispatch = useDispatch();
 
   const accessTokenExpirationDate = useSelector(
-    (state) => state.auth.accessTokenExpirationDate,
+    (state) => state.auth.authInfo.accessTokenExpirationDate,
   );
 
-  const refreshToken = useSelector((state) => state.auth.refreshToken);
+  const refreshToken = useSelector((state) => state.auth.authInfo.refreshToken);
 
   const { navigate } = useNavigation();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const currentDate = new Date();
+    const dateAccessTokenExpiration = new Date(accessTokenExpirationDate);
     if (accessTokenExpirationDate) {
-      if (currentDate > accessTokenExpirationDate) {
+      if (currentDate < dateAccessTokenExpiration) {
         setLoading(false);
         navigate('Profile');
       } else {
         handleRefresh();
       }
+    } else {
+      setLoading(false);
     }
   }, [
     navigate,
@@ -51,7 +51,7 @@ const Login = () => {
 
   const login = async () => {
     setLoading(true);
-    await dispatch(loginGithub());
+    await dispatch(getNewAccessToken());
     setLoading(false);
     navigate('Profile');
   };
