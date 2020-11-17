@@ -1,34 +1,59 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   View,
   SafeAreaView,
   ImageBackground,
   ActivityIndicator,
 } from 'react-native';
-import { useDispatch } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
 import ButtonWithLogo from './ButtonWithLogo';
-
 import backgroundImg from '../../assets/background.jpg';
-
+import {
+  getNewAccessToken,
+  loginGithub,
+} from '../../store/modules/auth/actions';
 import styles from './styles';
-import { loginGithub } from '../../state/auth/actions';
 
 const Login = () => {
   const dispatch = useDispatch();
-  const { navigate } = useNavigation();
-  const [loading, setLoading] = useState(false);
 
-  const goToProfile = () => {
-    navigate('Profile');
-  };
+  const accessTokenExpirationDate = useSelector(
+    (state) => state.auth.accessTokenExpirationDate,
+  );
+
+  const refreshToken = useSelector((state) => state.auth.refreshToken);
+
+  const { navigate } = useNavigation();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const currentDate = new Date();
+    if (accessTokenExpirationDate) {
+      if (currentDate > accessTokenExpirationDate) {
+        setLoading(false);
+        navigate('Profile');
+      } else {
+        handleRefresh();
+      }
+    }
+  }, [
+    navigate,
+    dispatch,
+    accessTokenExpirationDate,
+    refreshToken,
+    handleRefresh,
+  ]);
+
+  const handleRefresh = useCallback(() => {
+    dispatch(getNewAccessToken(refreshToken));
+  }, [dispatch, refreshToken]);
 
   const login = async () => {
     setLoading(true);
     await dispatch(loginGithub());
     setLoading(false);
-    goToProfile();
+    navigate('Profile');
   };
 
   return (
@@ -46,5 +71,4 @@ const Login = () => {
   );
 };
 
-//export your list as a default export
 export default Login;
