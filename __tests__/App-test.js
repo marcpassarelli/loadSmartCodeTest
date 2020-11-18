@@ -7,8 +7,16 @@ import React from 'react';
 import App from '../App';
 
 // Note: test renderer must be required after react-native.
-import renderer from 'react-test-renderer';
+import renderer, { act } from 'react-test-renderer';
 
-it('renders correctly', () => {
-  renderer.create(<App />);
+// jest.mock(../__mocks__/@react-native-community/async-storage');
+it('renders correctly', async () => {
+  await act(async () => {
+    renderer.create(<App />);
+  });
+});
+
+it('renders correctly across screens', () => {
+  const tree = renderer.create().toJSON();
+  expect(tree).toMatchSnapshot();
 });

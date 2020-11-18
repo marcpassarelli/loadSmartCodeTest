@@ -16,10 +16,12 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const accessTokenExpirationDate = useSelector(
-    (state) => state.auth.authInfo.accessTokenExpirationDate,
+    (state) => state.auth?.authInfo?.accessTokenExpirationDate,
   );
 
-  const refreshToken = useSelector((state) => state.auth.authInfo.refreshToken);
+  const refreshToken = useSelector(
+    (state) => state.auth?.authInfo?.refreshToken,
+  );
 
   const { navigate } = useNavigation();
   const [loading, setLoading] = useState(true);
