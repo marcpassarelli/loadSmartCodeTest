@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`async actions creates SET_USER when fetching for users info has been done 1`] = `
+Array [
+  Object {
+    "type": "SET_USER",
+    "userInfo": Object {
+      "avatar_url": "photo.jpg",
+      "bio": "Hello",
+      "location": "SP",
+      "login": "marcpassarelli",
+      "name": "Marc Victor",
+    },
+  },
+]
+`;

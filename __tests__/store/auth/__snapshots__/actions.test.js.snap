@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`async actions creates LOGIN_FAILED when authentication has been wrong 1`] = `
+Object {
+  "error": undefined,
+  "type": "LOGIN_FAILED",
+}
+`;
+
+exports[`async actions creates LOGIN_SUCCESS when authentication has been done 1`] = `
+Object {
+  "authInfo": undefined,
+  "type": "LOGIN_SUCCESS",
+}
+`;

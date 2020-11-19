@@ -33,6 +33,7 @@
     "@testing-library/react-native": "^7.1.0",
     "babel-jest": "^25.1.0",
     "eslint": "^6.5.1",
+    "fetch-mock-jest": "^1.3.0",
     "jest": "^25.1.0",
     "metro-react-native-babel-preset": "^0.59.0",
     "react-test-renderer": "16.13.1",
@@ -45,7 +46,9 @@
     ],
     "setupFiles": [
       "./node_modules/react-native-gesture-handler/jestSetup.js",
-      "./asyncStorageJest/jestSetupFile.js"
+      "./jestSetup/appAuth.js",
+      "./jestSetup/asyncStorage.js",
+      "./jestSetup/reactNavigation.js"
     ]
   }
 }
