@@ -78,10 +78,14 @@ const Profile = () => {
             <Text style={styles.textName}>{userInfo.name}</Text>
             <Text style={styles.textProfileInfo}>{userInfo.login}</Text>
             <Text style={styles.textProfileInfo}>{userInfo.location}</Text>
-            <Text style={styles.textProfileInfo}>{userInfo.bio}</Text>
+            {userInfo.bio && (
+              <View style={styles.areaBio}>
+                <Text style={styles.textProfileInfo}>{userInfo.bio}</Text>
+              </View>
+            )}
           </View>
           <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-            <Text>Logout?</Text>
+            <Text style={styles.logoutText}>Click here to logout</Text>
           </TouchableOpacity>
         </>
       )}

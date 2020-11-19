@@ -5,6 +5,7 @@ import {
   SafeAreaView,
   ImageBackground,
   ActivityIndicator,
+  Text,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import ButtonWithLogo from './ButtonWithLogo';
@@ -22,6 +23,8 @@ const Login = () => {
   const refreshToken = useSelector(
     (state) => state.auth?.authInfo?.refreshToken,
   );
+
+  const isLogged = useSelector((state) => state.auth?.isLogged);
 
   const { navigate } = useNavigation();
   const [loading, setLoading] = useState(true);
@@ -55,7 +58,10 @@ const Login = () => {
     setLoading(true);
     await dispatch(getNewAccessToken());
     setLoading(false);
-    navigate('Profile');
+
+    if (isLogged) {
+      navigate('Profile');
+    }
   };
 
   return (
@@ -64,9 +70,12 @@ const Login = () => {
         {loading ? (
           <ActivityIndicator size="large" color="#fff" />
         ) : (
-          <View style={styles.buttonArea}>
-            <ButtonWithLogo onPress={login} />
-          </View>
+          <>
+            <Text style={styles.title}>Loadsmart Mobile Test</Text>
+            <View style={styles.buttonArea}>
+              <ButtonWithLogo onPress={login} />
+            </View>
+          </>
         )}
       </ImageBackground>
     </SafeAreaView>
