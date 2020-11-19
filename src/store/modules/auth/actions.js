@@ -9,7 +9,7 @@ export const loginSuccess = (authInfo) => ({
 });
 
 export const loginFailed = (error) => ({
-  type: actionTypes.LOGIN_SUCCESS,
+  type: actionTypes.LOGIN_FAILED,
   error,
 });
 

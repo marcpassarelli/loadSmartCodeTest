@@ -7,7 +7,7 @@ import styles from './styles';
 
 const ButtonWithLogo = ({ text, onPress }) => {
   return (
-    <TouchableOpacity style={styles.button} onPress={onPress}>
+    <TouchableOpacity testID={'button'} style={styles.button} onPress={onPress}>
       <Image source={markLogo} style={styles.markLogo} />
       <Text style={[styles.textButton]}>Login with</Text>
       <Image source={gitHubLogo} style={styles.githubLogo} />
