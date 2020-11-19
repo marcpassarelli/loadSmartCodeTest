@@ -1,4 +1,6 @@
-const initialState = {
+import actionTypes from './actionTypes';
+
+export const initialState = {
   authInfo: {},
   error: undefined,
   isLogged: false,
@@ -6,7 +8,7 @@ const initialState = {
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'LOGIN_SUCCESS':
+    case actionTypes.LOGIN_SUCCESS:
       return {
         ...state,
         error: undefined,
@@ -14,13 +16,14 @@ const authReducer = (state = initialState, action) => {
         isLogged: true,
       };
 
-    case 'LOGIN_FAILED':
+    case actionTypes.LOGIN_FAILED:
       return {
         ...state,
         error: action.error,
+        isLogged: false,
       };
 
-    case 'LOGOUT':
+    case actionTypes.LOGOUT:
       return {
         ...initialState,
       };
@@ -30,3 +33,5 @@ const authReducer = (state = initialState, action) => {
 };
 
 export default authReducer;
+
+//test login with expirationDate

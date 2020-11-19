@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../store/modules/auth/actions';
-import { getUser } from '../../store/modules/user/actions';
+import { getUser, setUser } from '../../store/modules/user/actions';
 
 import styles from './styles';
 
@@ -50,6 +50,7 @@ const Profile = () => {
             // This will continue the action that had triggered the removal of the screen
             onPress: () => {
               dispatch(logout());
+              dispatch(setUser({}));
               navigation.dispatch(event.data.action);
             },
           },

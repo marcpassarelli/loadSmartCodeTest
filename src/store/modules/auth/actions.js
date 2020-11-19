@@ -1,35 +1,21 @@
 import { Platform } from 'react-native';
 import { authorize, refresh } from 'react-native-app-auth';
 import { configAndroid, configIos } from '../../../config';
+import actionTypes from './actionTypes';
 
 export const loginSuccess = (authInfo) => ({
-  type: 'LOGIN_SUCCESS',
+  type: actionTypes.LOGIN_SUCCESS,
   authInfo,
 });
 
 export const loginFailed = (error) => ({
-  type: 'LOGIN_FAILED',
+  type: actionTypes.LOGIN_SUCCESS,
   error,
 });
 
 export const logout = () => ({
-  type: 'LOGOUT',
+  type: actionTypes.LOGOUT,
 });
-
-export const loginGithub = () => {
-  return async (dispatch) => {
-    try {
-      const authInfo =
-        Platform.OS === 'ios'
-          ? await authorize(configIos)
-          : await authorize(configAndroid);
-
-      dispatch(loginSuccess(authInfo));
-    } catch (error) {
-      dispatch(loginFailed(error));
-    }
-  };
-};
 
 export const getNewAccessToken = (refreshToken) => {
   return async (dispatch) => {

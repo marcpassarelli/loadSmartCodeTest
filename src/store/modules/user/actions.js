@@ -1,6 +1,8 @@
+import actionTypes from './actionTypes';
+
 export const setUser = (userInfo) => {
   return {
-    type: 'SET_USER',
+    type: actionTypes.SET_USER,
     userInfo,
   };
 };
