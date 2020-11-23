@@ -12,9 +12,9 @@ Steps to reproduce:
 
 Libraries used:
 
-React Navigation (5.x) with React Navigation Stack (for navigation between screens)
-React Native App Auth to handle the login with github
-Redux (and Redux Thunk) for state management with Redux Persist and Async Storage for persisting the store when closing the app
+- React Navigation (5.x) with React Navigation Stack (for navigation between screens)
+- React Native App Auth to handle the login with github
+- Redux (and Redux Thunk) for state management with Redux Persist and Async Storage for persisting the store when closing the app
 
 
 Screenshots:
