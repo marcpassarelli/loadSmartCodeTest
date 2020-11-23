@@ -1,6 +1,6 @@
 # loadSmartCodeTest
 
-Simple App with Login with Github feature (using react-native-app-auth) and Github Profile Page
+Simple App with Login with Github feature (using react-native-app-auth) and Github Profile Page (currently working only in iOS)
 
 Steps to reproduce:
 - Clone the repository.
