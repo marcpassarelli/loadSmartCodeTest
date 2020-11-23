@@ -52,7 +52,12 @@ const Login = () => {
 
   const handleRefresh = useCallback(() => {
     dispatch(getNewAccessToken(refreshToken));
-  }, [dispatch, refreshToken]);
+    setLoading(false);
+
+    if (isLogged) {
+      navigate('Profile');
+    }
+  }, [dispatch, refreshToken, isLogged, navigate]);
 
   const login = async () => {
     setLoading(true);
