@@ -10,6 +10,14 @@ Steps to reproduce:
 - https://github.com/openid/AppAuth-iOS/pull/206/commits/142b6bc1b8e15e04cdb37fec1d420a8401641b1a
 - Then run npx react-native run-ios
 
+Libraries used:
+
+React Navigation (5.x) with React Navigation Stack (for navigation between screens)
+React Native App Auth to handle the login with github
+Redux (and Redux Thunk) for state management with Redux Persist and Async Storage for persisting the store when closing the app
+
+
+Screenshots:
 <table> 
   <tr>
     <td>
